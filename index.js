@@ -1,4 +1,5 @@
 import  express from "express";
+import  morgan from "morgan";
 const app = express();
 const PORT = 3000;
 const task = [
@@ -8,13 +9,20 @@ const task = [
     { id: 4, name: "Task 5", completed: false },
     
 ]
+app.use(morgan('tiny'));
+function middleware(req,res,next) {
+    console.log("Middleware executed");
+    next();
 
-app.get( "/" , (req ,res ) =>{
+
+}
+app.use(middleware);
+app.get( "/" , (req  ,res ) =>{
     res.send(task)
 
 });
 app.post( "/" , (req ,res ) =>{
-    res.send("todo   post")
+    res.send("todo saad  post")
 
 });
 app.put( "/" , (req ,res ) =>{
